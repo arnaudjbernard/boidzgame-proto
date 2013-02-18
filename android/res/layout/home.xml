@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="top"
+        android:text="@string/hometitle"
+        android:textSize="33sp" />
+
+    <Button
+        android:id="@+id/playbutton"
+        android:layout_width="172sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onPlayClick"
+        android:text="@string/play"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/highscorebutton"
+        android:layout_width="172sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onHighscoreClick"
+        android:text="@string/highscores" />
+
+    <Button
+        android:id="@+id/settingsbutton"
+        android:layout_width="172sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onSettingsClick"
+        android:text="@string/preferences" />
+
+    <Button
+        android:id="@+id/quitbutton"
+        android:layout_width="172sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onQuitClick"
+        android:text="@string/quit" />
+
+</LinearLayout>

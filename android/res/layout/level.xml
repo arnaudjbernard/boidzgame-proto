@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <com.boidzgame.gameplay.rendering.LevelView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/scene"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/pauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:onClick="onPauseButtonClick"
+        android:text="@string/pause" />
+
+</merge>
