@@ -1,7 +1,5 @@
 package com.boidzgame.gameplay.entity;
 
-import android.os.Bundle;
-
 import com.boidzgame.R;
 import com.boidzgame.gameplay.component.Coordinates;
 import com.boidzgame.gameplay.component.container.GoldfishContainer;
@@ -30,13 +28,5 @@ public class Shark {
 		coordinates = null;
 		mRenderer = null;
 		mTicker = null;
-	}
-
-	public void save(Bundle outState) {
-		// TODO Auto-generated method stub
-	}
-
-	public void restore(Bundle outState) {
-		// TODO Auto-generated method stub
 	}
 }

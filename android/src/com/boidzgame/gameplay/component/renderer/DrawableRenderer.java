@@ -11,28 +11,27 @@ import com.boidzgame.gameplay.rendering.Renderer;
 
 public class DrawableRenderer extends Renderer {
 	// private static final String TAG = "Renderer";
-	protected int drawable;
+	protected int mDrawable;
 	protected Coordinates mCoordinates;
 	protected Level mLevel;
 	protected Bitmap mBitmap;
 	protected int imageWidth;
 	protected int imageHeight;
 	protected Matrix mMatrix = new Matrix();
-	protected int layer = 0;
 
 	public DrawableRenderer(int drawable) {
-		this.drawable = drawable;
+		this.mDrawable = drawable;
 	}
 
 	public DrawableRenderer(int drawable, int layer) {
-		this.drawable = drawable;
-		this.layer = layer;
+		this.mDrawable = drawable;
+		this.mLayer = layer;
 	}
 
 	public void setup(Level level, Coordinates coordinates) {
 		this.mCoordinates = coordinates;
 		this.mLevel = level;
-		mLevel.rendererManager.register(this, layer);
+		mLevel.rendererManager.register(this);
 
 	}
 
@@ -45,8 +44,7 @@ public class DrawableRenderer extends Renderer {
 	@Override
 	public void draw(int delay, Canvas canvas, double scaleX, double scaleY) {
 		if (mBitmap == null) {
-			mBitmap = BitmapFactory.decodeResource(mLevel.levelActivity.getResources(),
-					drawable);
+			mBitmap = BitmapFactory.decodeResource(mLevel.levelActivity.getResources(), mDrawable);
 			imageWidth = (int) (mBitmap.getWidth() * scaleX + 0.5f);
 			imageHeight = (int) (mBitmap.getHeight() * scaleY + 0.5f);
 			mBitmap = Bitmap.createScaledBitmap(mBitmap, imageWidth, imageHeight, false);
@@ -57,8 +55,8 @@ public class DrawableRenderer extends Renderer {
 		mMatrix.reset();
 		double speed = Math.sqrt(sx * sx + sy * sy);
 		if (speed > 0.001) {
-			mMatrix.setSinCos((float) (sx / speed), -(float) (sy / speed),
-					imageHeight * 0.5f, imageWidth * 0.5f);
+			mMatrix.setSinCos((float) (sx / speed), -(float) (sy / speed), imageHeight * 0.5f,
+					imageWidth * 0.5f);
 			// Log.d(TAG, "sImage.getHeight(): "+
 			// (sImage.getHeight())+" sImage.getWidth(): "+(sImage.getWidth()));
 		}

@@ -46,26 +46,27 @@ public class SheepTicker extends TickerComponent {
 	/** this particle coordinates to update on tick */
 	private Coordinates mCoordinates;
 	/** the sheep manager */
-	private SheepContainer mSheepManager;
+	private SheepContainer mSheepContainer;
 	/** the dog manager */
-	private DogContainer mDogManager;
+	private DogContainer mDogContainer;
 	/** random for brown agitation */
 	private Random mRand;
 
-	public void setup(Level level, Coordinates coordinates) {
+	public void setup(Level level, Coordinates coordinates, SheepContainer sheepContainer,
+			DogContainer dogContainer) {
 		super.setup(level);
 		// this.mParticles = PartzActivity.instance.particles;
 		this.mCoordinates = coordinates;
-		this.mSheepManager = null;
-		this.mDogManager = null;
+		this.mSheepContainer = sheepContainer;
+		this.mDogContainer = dogContainer;
 		this.mRand = new Random();
 	}
 
 	@Override
 	public void clean() {
 		this.mCoordinates = null;
-		this.mDogManager = null;
-		this.mSheepManager = null;
+		this.mDogContainer = null;
+		this.mSheepContainer = null;
 		this.mRand = null;
 		super.clean();
 	}
@@ -83,7 +84,7 @@ public class SheepTicker extends TickerComponent {
 		double sy = mCoordinates.speedY;
 
 		// aggregation radius
-		Position centerOfMass = mSheepManager.centersOfMass;
+		Position centerOfMass = mSheepContainer.centersOfMass;
 		double distFromCenter = MathUtil.dist(centerOfMass.x, centerOfMass.y, x, y);
 		// Log.d(TAG, "distFromCenter " + distFromCenter);
 
@@ -101,7 +102,7 @@ public class SheepTicker extends TickerComponent {
 		// schooling
 		if (distFromCenter < aggregationOutRadius) {
 			inFlock = true;
-			Position globalSpeed = mSheepManager.globalSpeed;
+			Position globalSpeed = mSheepContainer.globalSpeed;
 			acc.x += schoolingF * globalSpeed.x;
 			acc.y += schoolingF * globalSpeed.y;
 		} else {
@@ -147,8 +148,8 @@ public class SheepTicker extends TickerComponent {
 		double distFromDog;
 		double dx;
 		double dy;
-		for (int i = mDogManager.boids.size() - 1; i >= 0; i--) {
-			Dog dog = mDogManager.boids.get(i);
+		for (int i = mDogContainer.boids.size() - 1; i >= 0; i--) {
+			Dog dog = mDogContainer.boids.get(i);
 			dx = x - dog.coordinates.positionX;
 			dy = y - dog.coordinates.positionY;
 			distFromDog = Math.sqrt(dx * dx + dy * dy);

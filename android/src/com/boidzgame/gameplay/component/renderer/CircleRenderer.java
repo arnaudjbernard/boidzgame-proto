@@ -3,6 +3,7 @@ package com.boidzgame.gameplay.component.renderer;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 import com.boidzgame.gameplay.component.Coordinates;
 import com.boidzgame.gameplay.level.Level;
@@ -11,22 +12,26 @@ import com.boidzgame.gameplay.rendering.Renderer;
 public class CircleRenderer extends Renderer {
 	@SuppressWarnings("unused")
 	private static final String TAG = "CircleRenderer";
-	protected int color;
+	protected int mColor;
 	protected Coordinates mCoordinates;
 	protected Level mLevel;
 	protected Bitmap sImage;
-	protected int layer = 0;
 
+	/**
+	 * @param color argb
+	 * @param layer superior on top
+	 */
 	public CircleRenderer(int color, int layer) {
 		super();
-		this.color = color;
-		this.layer = layer;
+		this.mColor = color;
+		this.mLayer = layer;
+		paint.setColor(mColor);
 	}
 
 	public void setup(Level level, Coordinates coordinates) {
 		this.mCoordinates = coordinates;
 		this.mLevel = level;
-		mLevel.rendererManager.register(this, layer);
+		mLevel.rendererManager.register(this);
 	}
 
 	public void clean() {
@@ -35,14 +40,15 @@ public class CircleRenderer extends Renderer {
 		this.mCoordinates = null;
 	}
 
-	private Paint paint = new Paint();
+	public Paint paint = new Paint();
 
 	@Override
 	public void draw(int delay, Canvas canvas, double scaleX, double scaleY) {
-		paint.setColor(color);
-		canvas.drawCircle((float) (mCoordinates.positionX * scaleX),
-				(float) (mCoordinates.positionY * scaleY),
-				(float) (mCoordinates.width * scaleX), paint);
+		if (mCoordinates.width == 0)
+			Log.w(TAG, "mCoordinates.width should not be 0");
+		float cx = canvas.getWidth() * 0.5f + (float) (mCoordinates.positionX * scaleX);
+		float cy = canvas.getHeight() * 0.5f + (float) (mCoordinates.positionY * scaleY);
+		canvas.drawCircle(cx, cy, (float) (mCoordinates.width * scaleX), paint);
 
 		// Paint paint = new Paint();
 		// paint.setColor(0xFFFFFFFF);

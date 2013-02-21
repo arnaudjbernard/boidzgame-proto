@@ -10,7 +10,7 @@ public class Food {
 
 	public void setup(Level level) {
 		coordinates = new Coordinates();
-		renderer = new CircleRenderer(0xff008800, 0);
+		renderer = new CircleRenderer(0xffffffcc, 0);
 		renderer.setup(level, coordinates);
 	}
 

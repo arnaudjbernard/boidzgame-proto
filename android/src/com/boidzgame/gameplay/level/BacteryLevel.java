@@ -40,8 +40,8 @@ public class BacteryLevel extends Level {
 		for (int i = 0; i < GOOD_BACTERY_INITIAL_COUNT + BAD_BACTERY_INITIAL_COUNT; i++) {
 			bacteryContainer.add(new Bactery());
 		}
-		bacteryContainer.setupBacteries(GOOD_BACTERY_INITIAL_COUNT,
-				BAD_BACTERY_INITIAL_COUNT);
+		bacteryContainer.setupBacteries(GOOD_BACTERY_INITIAL_COUNT, BAD_BACTERY_INITIAL_COUNT,
+				foodContainer, bacteryContainer);
 	}
 
 	@Override
@@ -86,8 +86,7 @@ public class BacteryLevel extends Level {
 	}
 
 	private void checkVictoryContdition() {
-		if (!gameOver
-				&& bacteryContainer.getGoodBacteriesCount() >= GOOD_BACTERY_FINAL_COUNT
+		if (!gameOver && bacteryContainer.getGoodBacteriesCount() >= GOOD_BACTERY_FINAL_COUNT
 				&& bacteryContainer.getBadBacteriesCount() <= BAD_BACTERY_FINAL_COUNT) {
 			Log.d(TAG, "Game Won");
 			gameOver = true;

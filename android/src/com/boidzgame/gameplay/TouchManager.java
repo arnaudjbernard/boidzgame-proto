@@ -44,16 +44,15 @@ public class TouchManager extends Ticker {
 		newFingersList.clear();
 	}
 
-	public boolean addTouch(MotionEvent event, double offsetX, double offsetY,
-			double scaleX, double scaleY) {
+	public boolean addTouch(MotionEvent event, double offsetX, double offsetY, double scaleX,
+			double scaleY) {
 		// loop over the pointers
 		int actionIndex = event.getActionIndex();
 		int action = event.getActionMasked();
 		Finger finger;
 		synchronized (mUpdateMutex) {
 
-			if (action == MotionEvent.ACTION_DOWN
-					|| action == MotionEvent.ACTION_POINTER_DOWN) {
+			if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN) {
 				// create new finger
 				finger = new Finger();// TODO: Finger pool
 				finger.id = event.getPointerId(actionIndex);
@@ -61,8 +60,7 @@ public class TouchManager extends Ticker {
 				finger.nextY = (event.getY(actionIndex) + offsetY) / scaleY;
 				newFingersList.add(finger);
 				// Log.i(TAG, "a add " + finger.id);
-			} else if (action == MotionEvent.ACTION_UP
-					|| action == MotionEvent.ACTION_POINTER_UP) {
+			} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
 				// remove finger
 				finger = getFingerById(event.getPointerId(actionIndex));
 				if (finger != null) {
@@ -133,6 +131,8 @@ public class TouchManager extends Ticker {
 					if (f.toRemove) {
 						it.remove();
 						// Log.i(TAG, "remove " + f.id);
+					} else {
+						f.age += delay;
 					}
 				}
 			}

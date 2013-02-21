@@ -21,6 +21,8 @@
     <string name="level1_description">Eat all the goldfishes.</string>
     <string name="level2_title">Sheep level</string>
     <string name="level2_description">Gather the flock.</string>
+    <string name="level3_title">Bactery level</string>
+    <string name="level3_description">Help the good ones survive.</string>
     <string name="settings_category_sound">Sound</string>
     <string name="settings_music_enabled_title">Music</string>
     <string name="settings_music_enabled_summary">Play the background music.</string>

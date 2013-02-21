@@ -46,8 +46,8 @@ public class LevelSelectScreenActivity extends ListActivity {
 		String[] from = new String[] { "name", "description" };
 		int[] to = new int[] { R.id.level_name, R.id.level_description };
 
-		SimpleAdapter adapter = new SimpleAdapter(this, levels,
-				R.layout.levelselectoritem, from, to);
+		SimpleAdapter adapter = new SimpleAdapter(this, levels, R.layout.levelselectoritem, from,
+				to);
 
 		setListAdapter(adapter);
 

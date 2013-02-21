@@ -35,7 +35,8 @@ public class LevelView extends SurfaceView implements IRenderer, SurfaceHolder.C
 
 	public void setup(Level level) {
 		this.level = level;
-		level.rendererManager.register(this, -10);
+		this.mLayer = -10;
+		level.rendererManager.register(this);
 		this.mListening = true;
 	}
 
@@ -48,8 +49,8 @@ public class LevelView extends SurfaceView implements IRenderer, SurfaceHolder.C
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		if (rendering && mListening) {
-			return level.touchManager.addTouch(event, mTouchOffsetX, mTouchOffsetY,
-					mScaleX, mScaleY);
+			return level.touchManager.addTouch(event, mTouchOffsetX, mTouchOffsetY, mScaleX,
+					mScaleY);
 		}
 		return false;
 	}
@@ -71,10 +72,6 @@ public class LevelView extends SurfaceView implements IRenderer, SurfaceHolder.C
 
 	public int getLayer() {
 		return mLayer;
-	}
-
-	public void setLayer(int layer) {
-		mLayer = layer;
 	}
 
 	public void draw(int delay, Canvas canvas, double scaleX, double scaleY) {

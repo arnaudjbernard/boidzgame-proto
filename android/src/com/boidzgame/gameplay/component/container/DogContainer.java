@@ -31,7 +31,6 @@ public class DogContainer extends BoidzContainer<Dog> {
 	public void tick(double delay) {
 		List<Finger> fingers = mLevel.touchManager.fingersList;
 		fingerlessDogs.clear();
-		fingerlessDogs.clear();
 
 		// remove depleted fingers
 		// compute takenFingers and fingerlessDogs

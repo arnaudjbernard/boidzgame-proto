@@ -1,12 +1,13 @@
 package com.boidzgame.gameplay.component.container;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.boidzgame.gameplay.component.ticker.TickerComponent;
 
 public abstract class BoidzContainer<BoidClass> extends TickerComponent {
-	public List<BoidClass> boids = new ArrayList<BoidClass>();
+	public List<BoidClass> boids = new LinkedList<BoidClass>();
 
 	public BoidzContainer() {
 		super();

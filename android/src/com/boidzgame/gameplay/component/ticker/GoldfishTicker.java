@@ -39,14 +39,14 @@ public class GoldfishTicker extends TickerComponent {
 	private Random mRand;
 	private GoldfishContainer mGoldfishContainer;
 
-	public void setup(Level level, GoldfishContainer goldfishContainer,
-			Coordinates coordinates, Shark shark) {
+	public void setup(Level level, GoldfishContainer goldfishContainer, Coordinates coordinates,
+			Shark shark) {
 		super.setup(level);
 		// this.mParticles = PartzActivity.instance.particles;
 		this.mCoordinates = coordinates;
 		this.mGoldfishContainer = goldfishContainer;
 		this.mShark = shark;
-		mRand = new Random();
+		this.mRand = new Random();
 	}
 
 	@Override
@@ -122,8 +122,8 @@ public class GoldfishTicker extends TickerComponent {
 		// dynamic
 		mCoordinates.speedX = mCoordinates.speedX + acc.x * delay / mass;
 		mCoordinates.speedY = mCoordinates.speedY + acc.y * delay / mass;
-		speedNorm = Math.sqrt(mCoordinates.speedX * mCoordinates.speedX
-				+ mCoordinates.speedY * mCoordinates.speedY);
+		speedNorm = Math.sqrt(mCoordinates.speedX * mCoordinates.speedX + mCoordinates.speedY
+				* mCoordinates.speedY);
 		// max speed
 		if (speedNorm > maxSpeed) {
 			mCoordinates.speedX = mCoordinates.speedX * maxSpeed / speedNorm;

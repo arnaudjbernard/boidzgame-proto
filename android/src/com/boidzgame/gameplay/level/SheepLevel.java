@@ -54,7 +54,7 @@ public class SheepLevel extends Level {
 		for (int i = 0; i < DOG_COUNT; i++) {
 			dogContainer.add(new Dog());
 		}
-		sheepContainer.setupSheeps();
+		sheepContainer.setupSheeps(sheepContainer, dogContainer);
 		dogContainer.setupDogs();
 		meadow.setup(this, sheepContainer);
 
@@ -62,10 +62,10 @@ public class SheepLevel extends Level {
 		meadow.coordinates.positionY = 10 + MEADOW_RADIUS;
 
 		for (Sheep sheep : sheepContainer.boids) {
-			sheep.coordinates.positionX = (rand.nextDouble() - 0.5) * SHEEP_SPREAD
-					+ this.width * 0.5;
-			sheep.coordinates.positionY = (rand.nextDouble() - 0.5) * SHEEP_SPREAD
-					+ this.height * 0.5;
+			sheep.coordinates.positionX = (rand.nextDouble() - 0.5) * SHEEP_SPREAD + this.width
+					* 0.5;
+			sheep.coordinates.positionY = (rand.nextDouble() - 0.5) * SHEEP_SPREAD + this.height
+					* 0.5;
 		}
 
 		handler = new SheepLevelHandler();

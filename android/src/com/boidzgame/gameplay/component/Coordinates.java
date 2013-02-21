@@ -7,7 +7,7 @@ public class Coordinates {
 	public double speedY = 0;
 	public double accX = 0;
 	public double accY = 0;
-	
+
 	public double width = 0;
 	public double height = 0;
 }

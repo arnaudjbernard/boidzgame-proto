@@ -8,9 +8,9 @@ public class SheepContainer extends BoidzContainer<Sheep> {
 	public Position centersOfMass = new Position(0, 0);
 	public Position globalSpeed = new Position(0, 0);
 
-	public void setupSheeps() {
+	public void setupSheeps(SheepContainer sheepContainer, DogContainer dogContainer) {
 		for (Sheep s : boids) {
-			s.setup(mLevel);
+			s.setup(mLevel, sheepContainer, dogContainer);
 		}
 	}
 

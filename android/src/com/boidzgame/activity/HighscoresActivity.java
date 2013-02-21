@@ -66,16 +66,14 @@ public class HighscoresActivity extends ListActivity implements
 		// startManagingCursor(highscoresCursor);
 
 		// Create an array to specify the fields we want to display in the list
-		String[] from = new String[] { HighscoreManager.KEY_NICKNAME,
-				HighscoreManager.KEY_SCORE };
+		String[] from = new String[] { HighscoreManager.KEY_NICKNAME, HighscoreManager.KEY_SCORE };
 
 		// and an array of the fields we want to bind those fields to (in this
 		// case just text1)
 		int[] to = new int[] { R.id.nickname, R.id.score };
 
 		// Now create a simple cursor adapter and set it to display
-		mAdapter = new SimpleCursorAdapter(this, R.layout.highscoresitem, null, from, to,
-				0);
+		mAdapter = new SimpleCursorAdapter(this, R.layout.highscoresitem, null, from, to, 0);
 		setListAdapter(mAdapter);
 
 		getLoaderManager().initLoader(0, null, this);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.boidzgame.R;
+import com.boidzgame.gameplay.level.BacteryLevel;
 import com.boidzgame.gameplay.level.Level;
 import com.boidzgame.gameplay.level.SharkLevel;
 import com.boidzgame.gameplay.level.SheepLevel;
@@ -26,6 +27,12 @@ public class LevelManager {
 		level.levelId = i++;
 		level.titleResourceId = R.string.level2_title;
 		level.desciptionResourceId = R.string.level2_description;
+		levelList.add(level);
+
+		level = new BacteryLevel();
+		level.levelId = i++;
+		level.titleResourceId = R.string.level3_title;
+		level.desciptionResourceId = R.string.level3_description;
 		levelList.add(level);
 	}
 

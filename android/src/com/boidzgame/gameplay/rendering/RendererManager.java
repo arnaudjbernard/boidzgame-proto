@@ -24,11 +24,6 @@ public class RendererManager {
 	private List<IRenderer> mRenderers = new ArrayList<IRenderer>();
 
 	public void register(IRenderer renderer) {
-		register(renderer, 0);
-	}
-
-	public void register(IRenderer renderer, int layer) {
-		renderer.setLayer(layer);
 		mRenderers.add(renderer);
 		mSorted = false;
 	}

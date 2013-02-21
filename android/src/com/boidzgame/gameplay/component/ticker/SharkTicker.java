@@ -43,8 +43,7 @@ public class SharkTicker extends TickerComponent {
 	private Random mRand;
 	private GoldfishContainer mGoldfishContainer;
 
-	public void setup(Level level, Coordinates coordinates,
-			GoldfishContainer goldfishContainer) {
+	public void setup(Level level, Coordinates coordinates, GoldfishContainer goldfishContainer) {
 		super.setup(level);
 		this.mCoordinates = coordinates;
 		this.mGoldfishContainer = goldfishContainer;
@@ -129,8 +128,8 @@ public class SharkTicker extends TickerComponent {
 		// dynamic
 		mCoordinates.speedX = mCoordinates.speedX + acc.x * delay / mass;
 		mCoordinates.speedY = mCoordinates.speedY + acc.y * delay / mass;
-		speedNorm = Math.sqrt(mCoordinates.speedX * mCoordinates.speedX
-				+ mCoordinates.speedY * mCoordinates.speedY);
+		speedNorm = Math.sqrt(mCoordinates.speedX * mCoordinates.speedX + mCoordinates.speedY
+				* mCoordinates.speedY);
 		// max speed
 		if (speedNorm > maxSpeed) {
 			mCoordinates.speedX = mCoordinates.speedX * maxSpeed / speedNorm;

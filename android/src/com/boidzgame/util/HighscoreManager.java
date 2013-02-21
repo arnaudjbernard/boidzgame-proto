@@ -71,9 +71,9 @@ public class HighscoreManager {
 		public Cursor loadInBackground() {
 			Cursor cursor = null;
 			try {
-				cursor = mDb.query(true, TABLE_HIGHSCORES, new String[] { KEY_ROWID,
-						KEY_NICKNAME, KEY_SCORE }, KEY_LEVELID + "=" + mLevelId, null,
-						null, null, KEY_SCORE, "100");
+				cursor = mDb.query(true, TABLE_HIGHSCORES, new String[] { KEY_ROWID, KEY_NICKNAME,
+						KEY_SCORE }, KEY_LEVELID + "=" + mLevelId, null, null, null, KEY_SCORE,
+						"100");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -111,8 +111,8 @@ public class HighscoreManager {
 	public static final String KEY_SCORE = "score";
 
 	/** Database creation sql statement */
-	private static final String DATABASE_CREATE = "CREATE TABLE " + TABLE_HIGHSCORES
-			+ " (" + KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_LEVELID
+	private static final String DATABASE_CREATE = "CREATE TABLE " + TABLE_HIGHSCORES + " ("
+			+ KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_LEVELID
 			+ " INTEGER NOT NULL, " + KEY_NICKNAME + " TEXT NOT NULL, " + KEY_SCORE
 			+ " REAL NOT NULL);";
 
@@ -131,8 +131,8 @@ public class HighscoreManager {
 
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			Log.w(TAG, "Upgrading database from version " + oldVersion + " to "
-					+ newVersion + ", which will destroy all old data");
+			Log.w(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion
+					+ ", which will destroy all old data");
 			db.execSQL("DROP TABLE IF EXISTS " + TABLE_HIGHSCORES);
 			onCreate(db);
 		}

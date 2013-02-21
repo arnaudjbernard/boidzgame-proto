@@ -74,8 +74,7 @@ public class GameThread extends Thread {
 				}
 			} else if (ticking) {
 				// catch up ticks if computation slower than framerate
-				while (ticksCount < mMaxTicks
-						&& mEndTime - mStartTime > mFramedelay * ticksCount) {
+				while (ticksCount < mMaxTicks && mEndTime - mStartTime > mFramedelay * ticksCount) {
 					tickerManager.tick(mFramedelay / 1000000000.0d);
 					ticksCount++;
 				}

@@ -11,8 +11,7 @@ import android.preference.PreferenceManager;
 import com.boidzgame.R;
 import com.boidzgame.util.SoundManager;
 
-public class SettingsActivity extends Activity implements
-		OnSharedPreferenceChangeListener {
+public class SettingsActivity extends Activity implements OnSharedPreferenceChangeListener {
 	public static final String KEY_SETTINGS_MUSIC_ENABLED = "settings_music_enabled";
 	public static final String KEY_SETTINGS_SFX_ENABLED = "settings_sfx_enabled";
 
@@ -24,8 +23,8 @@ public class SettingsActivity extends Activity implements
 
 		// Display the fragment as the main content.
 		mSettingsFragment = new SettingsFragment();
-		getFragmentManager().beginTransaction()
-				.replace(android.R.id.content, mSettingsFragment).commit();
+		getFragmentManager().beginTransaction().replace(android.R.id.content, mSettingsFragment)
+				.commit();
 	}
 
 	public static void setupSettings(Context context) {
@@ -33,8 +32,7 @@ public class SettingsActivity extends Activity implements
 		PreferenceManager.setDefaultValues(context, R.xml.preferences, false);
 
 		// apply the current preferences
-		SharedPreferences sharedPref = PreferenceManager
-				.getDefaultSharedPreferences(context);
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
 
 		Boolean musicEnabled = sharedPref.getBoolean(KEY_SETTINGS_MUSIC_ENABLED, false);
 		SoundManager.setMusicEnabled(musicEnabled);
@@ -55,8 +53,7 @@ public class SettingsActivity extends Activity implements
 
 	public void onSharedPreferenceChanged(SharedPreferences sharedPref, String key) {
 		if (key.equals(KEY_SETTINGS_MUSIC_ENABLED)) {
-			Boolean musicEnabled = sharedPref.getBoolean(KEY_SETTINGS_MUSIC_ENABLED,
-					false);
+			Boolean musicEnabled = sharedPref.getBoolean(KEY_SETTINGS_MUSIC_ENABLED, false);
 			SoundManager.setMusicEnabled(musicEnabled);
 		} else if (key.equals(KEY_SETTINGS_SFX_ENABLED)) {
 			Boolean sfxEnabled = sharedPref.getBoolean(KEY_SETTINGS_SFX_ENABLED, true);
