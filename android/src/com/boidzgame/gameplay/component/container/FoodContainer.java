@@ -1,16 +1,19 @@
 package com.boidzgame.gameplay.component.container;
 
-import java.util.List;
 import java.util.Random;
 
 import com.boidzgame.gameplay.Finger;
 import com.boidzgame.gameplay.entity.Food;
 import com.boidzgame.gameplay.level.Level;
+import com.boidzgame.util.MathUtil;
 
 public class FoodContainer extends BoidzContainer<Food> {
 
 	private final int FOOD_PER_FINGER = 3;
-	private final double FOOD_DISPERSION = 10.0d;
+	private final double FOOD_DISPERSION = 16.0d;
+	private final int MAX_FOOD_AMOUNT = 201;
+	private final double FINGER_MAX_DISPLACEMENT = 32.0d;
+	private final double FINGER_MAX_AGE = 1.0d;
 	private Random mRandom;
 
 	@Override
@@ -21,9 +24,12 @@ public class FoodContainer extends BoidzContainer<Food> {
 
 	@Override
 	public void tick(double delay) {
-		List<Finger> fingers = mLevel.touchManager.fingersList;
-		for (Finger finger : fingers) {
-			if (finger.age == 0.0d) {
+		if (boids.size() >= MAX_FOOD_AMOUNT) {
+			return;
+		}
+		for (Finger finger : mLevel.touchManager.removedFingersList) {
+			if (finger.age < FINGER_MAX_AGE
+					&& MathUtil.dist(finger.firstX, finger.firstY, finger.lastX, finger.lastY) < FINGER_MAX_DISPLACEMENT) {
 				for (int i = 0; i < FOOD_PER_FINGER; i++) {
 					Food food = new Food();
 					boids.add(food);

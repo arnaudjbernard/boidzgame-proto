@@ -68,6 +68,8 @@ public class TouchManager extends Ticker {
 				finger = getFingerById(event.getPointerId(actionIndex));
 				if (finger != null) {
 					finger.toRemove = true;
+					finger.lastX = (event.getX(actionIndex) + offsetX) / scaleX;
+					finger.lastY = (event.getY(actionIndex) + offsetY) / scaleY;
 				}
 				// Log.i(TAG, "finger event remove " + finger.id);
 			}

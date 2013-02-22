@@ -8,6 +8,8 @@ public class Finger {
 	public double nextY;
 	public double x;
 	public double y;
-	public double firstY;
 	public double firstX;
+	public double firstY;
+	public double lastX;
+	public double lastY;
 }

@@ -28,17 +28,19 @@ public class BacteryTicker extends TickerComponent {
 	/** brown agitation when finger is up */
 	private static final double brown = 300.0d;
 	/** viscous friction */
-	private static final double fv = 0.01d;
+	private static final double fv = 0.1d;
 	/** mass of a particle */
 	private static final double mass = 1.0d;
 	/** maximum speed */
 	private static final double maxSpeed = 40d;
 	/** small distance to avoid divide by 0 */
-	private static final double epsDist = 0.01d;
+	private static final double epsDist = 1.0d;
 	/** food attraction */
 	private static final double fFood = 1000d;
 	/** finger repulsion */
-	private static final double fFinger = 5000d;
+	private static final double fFinger = 50000d;
+	/** finger repulsion distance */
+	private static final double fFingerDist = 60d;
 
 	private Bactery mBactery;
 	private Coordinates mCoordinates;
@@ -125,8 +127,10 @@ public class BacteryTicker extends TickerComponent {
 			double fearAccNorm = epsDist
 					+ MathUtil.dist(mCoordinates.positionX, mCoordinates.positionY, finger.x,
 							finger.y);
-			acc.x -= fFinger * fearDirX / (fearAccNorm * fearAccNorm * fearAccNorm);
-			acc.y -= fFinger * fearDirY / (fearAccNorm * fearAccNorm * fearAccNorm);
+			if (fFingerDist > fearAccNorm) {
+				acc.x -= fFinger * fearDirX / (fearAccNorm * fearAccNorm);
+				acc.y -= fFinger * fearDirY / (fearAccNorm * fearAccNorm);
+			}
 		}
 
 		// get attracted by nearest food
