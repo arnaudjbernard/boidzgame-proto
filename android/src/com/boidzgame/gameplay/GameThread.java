@@ -78,7 +78,7 @@ public class GameThread extends Thread {
 					tickerManager.tick(mFramedelay / 1000000000.0d);
 					ticksCount++;
 				}
-				Log.w(TAG, "Skipped: " + (ticksCount - 1));
+				// Log.d(TAG, "Skipped: " + (ticksCount - 1));
 			}
 			if (ticking) {
 				// try to achieve a certain amount of ticks per second

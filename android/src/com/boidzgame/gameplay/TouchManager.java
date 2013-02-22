@@ -1,7 +1,7 @@
 package com.boidzgame.gameplay;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.view.MotionEvent;
 
@@ -15,8 +15,9 @@ public class TouchManager extends Ticker {
 	@SuppressWarnings("unused")
 	private static final String TAG = "TouchManager";
 
-	public ArrayList<Finger> fingersList;
-	public ArrayList<Finger> newFingersList;
+	public List<Finger> fingersList;
+	public List<Finger> newFingersList;
+	public List<Finger> removedFingersList;
 
 	/** Mutex to protect thread safety when editing the finger list */
 	private Object mUpdateMutex;
@@ -26,8 +27,9 @@ public class TouchManager extends Ticker {
 	public TouchManager(TickerManager tickerManager) {
 		super();
 		mUpdateMutex = new Object();
-		fingersList = new ArrayList<Finger>(4);
-		newFingersList = new ArrayList<Finger>(4);
+		fingersList = new LinkedList<Finger>();
+		newFingersList = new LinkedList<Finger>();
+		removedFingersList = new LinkedList<Finger>();
 		this.tickerManager = tickerManager;
 	}
 
@@ -42,6 +44,7 @@ public class TouchManager extends Ticker {
 	public void reset() {
 		fingersList.clear();
 		newFingersList.clear();
+		removedFingersList.clear();
 	}
 
 	public boolean addTouch(MotionEvent event, double offsetX, double offsetY, double scaleX,
@@ -56,17 +59,17 @@ public class TouchManager extends Ticker {
 				// create new finger
 				finger = new Finger();// TODO: Finger pool
 				finger.id = event.getPointerId(actionIndex);
-				finger.nextX = (event.getX(actionIndex) + offsetX) / scaleX;
-				finger.nextY = (event.getY(actionIndex) + offsetY) / scaleY;
+				finger.firstX = (event.getX(actionIndex) + offsetX) / scaleX;
+				finger.firstY = (event.getY(actionIndex) + offsetY) / scaleY;
 				newFingersList.add(finger);
-				// Log.i(TAG, "a add " + finger.id);
+				// Log.i(TAG, "finger event add " + finger.id);
 			} else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
 				// remove finger
 				finger = getFingerById(event.getPointerId(actionIndex));
 				if (finger != null) {
 					finger.toRemove = true;
 				}
-				// Log.i(TAG, "a remove " + finger.id);
+				// Log.i(TAG, "finger event remove " + finger.id);
 			}
 
 			// update the current fingers
@@ -76,7 +79,7 @@ public class TouchManager extends Ticker {
 				if (finger != null && !finger.toRemove) {
 					finger.nextX = (event.getX(i) + offsetX) / scaleX;
 					finger.nextY = (event.getY(i) + offsetY) / scaleY;
-					// Log.i(TAG, "finger update " + finger.id + "    " +
+					// Log.i(TAG, "finger event update " + finger.id + "    " +
 					// finger.nextX + "    "
 					// + finger.nextY);
 				}
@@ -121,37 +124,39 @@ public class TouchManager extends Ticker {
 	 */
 	@Override
 	public void tick(double delay) {
-		Iterator<Finger> it;
 		synchronized (mUpdateMutex) {
-			// remove the ones gone
-			if (fingersList.size() > 0) {
-				it = fingersList.iterator();
-				while (it.hasNext()) {
-					Finger f = it.next();
+			// clear the removed list
+			if (!removedFingersList.isEmpty()) {
+				removedFingersList.clear();
+			}
+
+			if (!fingersList.isEmpty()) {
+				for (Finger f : fingersList) {
+					f.age += delay;
 					if (f.toRemove) {
-						it.remove();
+						// remove the ones gone
+						removedFingersList.add(f);
 						// Log.i(TAG, "remove " + f.id);
 					} else {
-						f.age += delay;
+						// update the positions
+						f.x = f.nextX;
+						f.y = f.nextY;
 					}
 				}
+				fingersList.removeAll(removedFingersList);
 			}
+
 			// add the new ones
-			if (newFingersList.size() > 0) {
-				it = newFingersList.iterator();
-				while (it.hasNext()) {
-					Finger f = it.next();
+			if (!newFingersList.isEmpty()) {
+				for (Finger f : newFingersList) {
+					f.x = f.firstX;
+					f.y = f.firstY;
 					fingersList.add(f);
-					it.remove();
 					// Log.i(TAG, "add " + f.id);
 				}
+				newFingersList.clear();
 			}
-			// update the positions
-			for (int i = fingersList.size() - 1; i >= 0; i--) {
-				Finger f = fingersList.get(i);
-				f.x = f.nextX;
-				f.y = f.nextY;
-			}
+			// Log.i(TAG, "finger count" + fingersList.size());
 		}
 	}
 }
