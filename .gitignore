@@ -22,3 +22,9 @@ local.properties
 
 # python compiled
 *.pyc
+
+# Android Studio
+.idea/workspace.xml
+.idea/tasks.xml
+.gradle
+build/

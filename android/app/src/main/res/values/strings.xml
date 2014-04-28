@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BoidzGame</string>
+    <string name="play">Play</string>
+    <string name="highscores">Highscores</string>
+    <string name="preferences">Settings</string>
+    <string name="hometitle">Boidz Game</string>
+    <string name="pause">||</string>
+    <string name="paused">Paused</string>
+    <string name="resume">Resume</string>
+    <string name="quit">Quit</string>
+    <string name="giveup">Give Up</string>
+    <string name="back">Back</string>
+    <string name="time">Time:</string>
+    <string name="close">Close</string>
+    <string name="you_won">You Won!</string>
+    <string name="enter_your_name">Enter your name for high scores</string>
+    <string name="nickname">Nickname</string>
+    <string name="level1_title">Shark level</string>
+    <string name="level1_description">Eat all the goldfishes.</string>
+    <string name="level2_title">Sheep level</string>
+    <string name="level2_description">Gather the flock.</string>
+    <string name="level3_title">Bacteria level</string>
+    <string name="level3_description">Help the good ones survive.</string>
+    <string name="settings_category_sound">Sound</string>
+    <string name="settings_music_enabled_title">Music</string>
+    <string name="settings_music_enabled_summary">Play the background music.</string>
+    <string name="settings_sfx_enabled_title">SFX</string>
+    <string name="settings_sfx_enabled_summary">Play the Sound Effects.</string>
+
+</resources>
